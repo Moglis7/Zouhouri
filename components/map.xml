@@ -1,0 +1,468 @@
+<krpano mapImage="./skin/inmap4.png" 
+		mapSpot="./skin/camicon.png" 
+		activeSpot="./skin/camicon_red.png" 
+		fsButtonMax="./UI/MAX.png" 
+		fsButtonMin="./UI/MIN.png" 
+		fsX="-50"
+		fsY="756"
+		>	
+	
+	<textstyle name="message2"
+           origin="cursor"
+           edge="bottom"
+           xoffset="0"
+           yoffset="-30"
+           fadeintime="0.0"
+           showtime="0.5"
+           fadetime="0.3"
+           font="Arial"
+           fontsize="20.0"
+           bold="true"
+           italic="false"
+           textcolor="0xFFFFFF"
+           textalign="none"
+           padding="2"
+           css=""
+           width=""
+           height=""
+           vcenter=""
+           background="true"
+           backgroundcolor="0xFFFFFF"
+           backgroundalpha="0.0"
+           border="true"
+           bordercolor="0x000000" 
+           borderalpha="1.0"
+           borderwidth="1.0"
+           roundedge="0"
+           shadow="0.0"
+           shadowrange="4.0"
+           shadowangle="45"
+           shadowcolor="0x000000"
+           shadowalpha="1.0"
+           textshadow="0.0"
+           textshadowrange="4.0"
+           textshadowangle="45"
+           textshadowcolor="0x000000"
+           textshadowalpha="1.0"
+           alpha="1.0"
+           parent=""
+           noclip="true"
+           />
+
+
+	<!-- the map spot images -->
+	<style name="mapspot" keep="true" url="get:mapSpot" scale="0.13" parent="map" align="lefttop" edge="center" scale.mobile="0.1" />
+	<style name="fsButton" keep="true" url="get:fsButtonMax" scale="3"  parent="map" align="lefttop" edge="center" scale.mobile="3" onclick="openmap();" />
+		<!-- active spot image (overlays the normal spot) -->
+	<layer name="activespot" url="get:activeSpot" keep="true" align="lefttop" zorder="2" scale="0.13" scale.mobile="0.1"/>
+
+		<!-- full screen btn on map -->
+	<layer name="fs" style="fsButton|tooltip" tooltip="Expand" x="get:fsX" y="get:fsY" zorder="1"  />
+
+	<!-- the map image -->
+	<layer name="map" url="get:mapImage" keep="true" handcursor="false" capture="false"
+		align="righttop"
+		scalechildren="true"
+		onclick="openmap();"
+		onloaded="scalesmall(); "
+	/> 
+
+	<!-- Scales small map -->
+	<action name="scalesmall">
+		set(layer[map].scale, 0.25);
+		
+		if (			
+			device.desktop, <!-- Desktop -->
+			div(smallscale, stagewidth, layer[map].imagewidth);			
+			div(smallscale, get(smallscale), 4);
+			tween(layer[map].scale, get(smallscale));
+			tween(layer[map].x, 1.5%);
+			tween(layer[map].y, 3%);
+			<!-- js(console.log('1')); -->
+			set(layer[map].rotate, 0);
+			,
+
+			(device.mobile AND !fullscreen) AND (stageheight GT stagewidth), <!-- mobile  not fullscreen  -->
+			div(smallscale, stagewidth, layer[map].imagewidth);			
+			div(smallscale, get(smallscale), 2); 
+			tween(layer[map].scale, get(smallscale));
+			tween(layer[map].x, 3%);
+			tween(layer[map].y, 1.5%);
+			<!-- js(console.log('2')); -->
+			set(layer[map].rotate, 0);
+			,		
+			
+			(device.mobile AND fullscreen)  AND (stageheight GT stagewidth), <!-- mobile fullscreen portrait  -->
+			div(smallscale, stagewidth, layer[map].imagewidth);			
+			div(smallscale, get(smallscale), 2);
+			tween(layer[map].scale, get(smallscale));
+			tween(layer[map].x, 1.5%);
+			tween(layer[map].y, 3%);
+			<!-- js(console.log('3')); -->
+			set(layer[map].rotate, 0);
+			,
+
+			(device.mobile AND !fullscreen) AND (stagewidth GT stageheight), <!-- mobile  not fullscreen  landscape -->
+			div(smallscale, stagewidth, layer[map].imagewidth);			
+			div(smallscale, get(smallscale), 4); 
+			tween(layer[map].scale, get(smallscale));
+			tween(layer[map].x, 3%);
+			tween(layer[map].y, 1.5%);
+			<!-- js(console.log('4')); -->
+			set(layer[map].rotate, 0);
+			,
+
+			(device.mobile AND fullscreen) AND (stagewidth GE stageheight), <!-- mobile fullscreen landscape  -->
+			div(smallscale, stagewidth, layer[map].imagewidth);
+			div(smallscale, get(smallscale), 4);
+			js(console.log(get(smallscale)));
+			tween(layer[map].scale, get(smallscale));
+			tween(layer[map].x, 3%);
+			tween(layer[map].y, 1.5%);
+			<!-- js(console.log('5')); -->
+			set(layer[map].rotate, 0);
+		);
+		
+	</action>
+
+	<!-- map opening - scale the map up to 100% (or smaller if the screen is too small) -->
+	<action name="openmap">
+		set(layer[map].onclick, closemap(););
+		set(layer[fs].onclick, closemap(););
+		set(layer[fs].url, get(fsButtonMin));
+		set(layer[fs].tooltip, "Scale Down");
+		set(layer[fs].scale, 1);
+		
+		<!-- trace('rotate = ', layer[map].rotate); -->
+
+		<!-- if(layer[map].imagewidth GT stagewidth, div(newscale, stagewidth, layer[map].imagewidth); ); 
+			trace('bigscale = ', bigscale);
+			trace('imagewidth = ', layer[map].imagewidth);
+			trace('windowsize = ', stagewidth, 'x', stageheight);
+			trace('areasize = ', area.pixelwidth, 'x', area.pixelheight);
+		-->
+
+		<!-- set the map in the middle of the screen --> 
+		layer[map].changeorigin(center,center);
+		
+		<!-- If the width > hight -->
+		if (
+			device.desktop, <!-- Desktop -->			
+			<!-- set the scale of the map -->
+			div(bigscale, stagewidth, layer[map].imagewidth);
+			div(bigscale, get(bigscale), 1.9);
+
+			<!-- Assign scale to the map -->
+			tween(layer[map].x, 0);
+			tween(layer[map].y, 0);
+			tween(layer[map].scale, get(bigscale));
+			set(layer[map].rotate, 0);	
+
+			,(device.mobile)  AND (!fullscreen), <!-- mobile  not fullscreen  -->			
+			<!-- set the scale of the map for mobiles -->
+			div(bigscale, stagewidth, layer[map].imagewidth);
+			div(bigscale, get(bigscale), 1.05);
+
+			<!-- Assign scale to the map -->
+			tween(layer[map].x, 0);
+			tween(layer[map].y, -5%);
+			tween(layer[map].scale, get(bigscale));
+			set(layer[map].rotate, 0);		
+			
+			,(device.mobile AND fullscreen)  AND (stageheight GT stagewidth), <!-- mobile fullscreen portrait  -->
+			<!-- set the scale of the map for mobiles -->
+			div(bigscale, stagewidth, layer[map].imagewidth);
+			div(bigscale, get(bigscale), 1.05);
+
+			<!-- Assign scale to the map -->
+			tween(layer[map].x, 0);
+			tween(layer[map].y, -5%);
+			tween(layer[map].scale, get(bigscale));
+			set(layer[map].rotate, 0);	
+
+			,(device.mobile AND fullscreen) AND (stagewidth GE stageheight), <!-- mobile fullscreen landscape  -->
+			<!-- set the scale of the map for mobiles -->
+			div(bigscale, stagewidth, layer[map].imagewidth);
+			div(bigscale, get(bigscale), 1.05);
+
+			<!-- Assign scale to the map -->
+			tween(layer[map].x, 0);
+			tween(layer[map].y, -5%);
+			tween(layer[map].scale, get(bigscale));		
+			set(layer[map].rotate, 0);	
+			
+		);	
+	</action>
+
+	<!-- map closing - scale the map back to 0.25 of its image pixelsize -->
+	<action name="closemap">		
+		set(layer[map].onclick, openmap(); );
+		set(layer[fs].onclick, openmap(); );
+		set(layer[fs].url, get(fsButtonMax));
+		set(layer[fs].tooltip, "Expand");
+		set(layer[fs].scale, 3);
+		<!-- set the map in the righttop of the screen --> 
+		layer[map].changeorigin(righttop,righttop);
+
+		<!-- If the width > hight -->
+		if (			
+			device.desktop, <!-- Desktop -->
+			div(smallscale, stagewidth, layer[map].imagewidth);			
+			div(smallscale, get(smallscale), 4);
+			tween(layer[map].scale, get(smallscale));
+			tween(layer[map].x, 1.5%);
+			tween(layer[map].y, 3%);
+			<!-- js(console.log('1')); -->
+			set(layer[map].rotate, 0);
+			,
+
+			(device.mobile AND !fullscreen) AND (stageheight GT stagewidth), <!-- mobile  not fullscreen portrait -->
+			div(smallscale, stagewidth, layer[map].imagewidth);			
+			div(smallscale, get(smallscale), 2); 
+			tween(layer[map].scale, get(smallscale));
+			tween(layer[map].x, 3%);
+			tween(layer[map].y, 1.5%);
+			<!-- js(console.log('2')); -->
+			set(layer[map].rotate, 0);
+			,		
+			
+			(device.mobile AND fullscreen)  AND (stageheight GT stagewidth), <!-- mobile fullscreen portrait  -->
+			div(smallscale, stagewidth, layer[map].imagewidth);			
+			div(smallscale, get(smallscale), 2);
+			tween(layer[map].scale, get(smallscale));
+			tween(layer[map].x, 1.5%);
+			tween(layer[map].y, 3%);
+			<!-- js(console.log('3')); -->
+			set(layer[map].rotate, 0);
+			,
+
+			(device.mobile AND !fullscreen) AND (stagewidth GT stageheight), <!-- mobile  not fullscreen  landscape -->
+			div(smallscale, stagewidth, layer[map].imagewidth);			
+			div(smallscale, get(smallscale), 4); 
+			tween(layer[map].scale, get(smallscale));
+			tween(layer[map].x, 3%);
+			tween(layer[map].y, 1.5%);
+			<!-- js(console.log('4')); -->
+			set(layer[map].rotate, 0);
+			,
+
+			(device.mobile AND fullscreen) AND (stagewidth GE stageheight), <!-- mobile fullscreen landscape  -->
+			div(smallscale, stagewidth, layer[map].imagewidth);
+			div(smallscale, get(smallscale), 4);
+			js(console.log(get(smallscale)));
+			tween(layer[map].scale, get(smallscale));
+			tween(layer[map].x, 3%);
+			tween(layer[map].y, 1.5%);
+			<!-- js(console.log('5')); -->
+			set(layer[map].rotate, 0);			
+		);
+		<!-- trace('smallscale = ', smallscale) -->
+
+	</action>
+
+	<!-- map closing - scale the map back to 0.25 of its image pixelsize -->
+	<action name="closemap2">		
+		set(layer[map].onclick, openmap(); );
+		set(layer[fs].onclick, openmap(); );
+		set(layer[fs].crop, "0|576|64|64");
+		set(layer[fs].tooltip, "Expand");
+		<!-- set the map in the righttop of the screen --> 
+		<!-- layer[map].changeorigin(righttop,righttop); -->
+
+		<!-- If the width > hight -->
+		if (			
+			device.desktop, <!-- Desktop -->
+			div(smallscale, stagewidth, layer[map].imagewidth);			
+			div(smallscale, get(smallscale), 4);
+			tween(layer[map].scale, get(smallscale));
+			tween(layer[map].x, 1.5%);
+			tween(layer[map].y, 3%);
+			<!-- js(console.log('1')); -->
+			set(layer[map].rotate, 0);
+			,
+
+			(device.mobile AND !fullscreen) AND (stageheight GT stagewidth), <!-- mobile  not fullscreen portrait -->
+			div(smallscale, stagewidth, layer[map].imagewidth);			
+			div(smallscale, get(smallscale), 2); 
+			tween(layer[map].scale, get(smallscale));
+			tween(layer[map].x, 3%);
+			tween(layer[map].y, 1.5%);
+			<!-- js(console.log('2')); -->
+			set(layer[map].rotate, 0);
+			,		
+			
+			(device.mobile AND fullscreen)  AND (stageheight GT stagewidth), <!-- mobile fullscreen portrait  -->
+			div(smallscale, stagewidth, layer[map].imagewidth);			
+			div(smallscale, get(smallscale), 2);
+			tween(layer[map].scale, get(smallscale));
+			tween(layer[map].x, 1.5%);
+			tween(layer[map].y, 3%);
+			<!-- js(console.log('3')); -->
+			set(layer[map].rotate, 0);
+			,
+
+			(device.mobile AND !fullscreen) AND (stagewidth GT stageheight), <!-- mobile  not fullscreen  landscape -->
+			div(smallscale, stagewidth, layer[map].imagewidth);			
+			div(smallscale, get(smallscale), 4); 
+			tween(layer[map].scale, get(smallscale));
+			tween(layer[map].x, 3%);
+			tween(layer[map].y, 1.5%);
+			<!-- js(console.log('4')); -->
+			set(layer[map].rotate, 0);
+			,
+
+			(device.mobile AND fullscreen) AND (stagewidth GE stageheight), <!-- mobile fullscreen landscape  -->
+			div(smallscale, stagewidth, layer[map].imagewidth);
+			div(smallscale, get(smallscale), 4);
+			js(console.log(get(smallscale)));
+			tween(layer[map].scale, get(smallscale));
+			tween(layer[map].x, 3%);
+			tween(layer[map].y, 1.5%);
+			<!-- js(console.log('5')); -->
+			set(layer[map].rotate, 0);			
+		);
+		<!-- trace('smallscale = ', smallscale) -->
+
+	</action>
+
+	<!-- <action name="load_map_items" >	
+		create_map_item("spot1", 920, 290, "scene_1");
+		create_map_item("spot2", 920, 290, "scene_2");
+		create_map_item("spot3", 920, 290, "scene_3");
+		create_map_item("spot4", 920, 290, "scene_4");
+		create_map_item("spot5", 920, 290, "scene_5");
+		create_map_item("spot6", 920, 290, "scene_6");
+		create_map_item("spot7", 920, 290, "scene_7");
+		create_map_item("spot8", 920, 290, "scene_8");
+		create_map_item("spot9", 920, 290, "scene_9");
+		create_map_item("spot10", 920, 290, "scene_10");
+		create_map_item("spot11", 920, 290, "scene_11");
+		create_map_item("spot12", 920, 290, "scene_12");
+		create_map_item("spot13", 920, 290, "scene_13");
+		create_map_item("spot14", 920, 290, "scene_14");
+		create_map_item("spot15", 920, 290, "scene_15");
+		create_map_item("spot16", 920, 290, "scene_16");
+		create_map_item("spot17", 920, 290, "scene_17");
+		create_map_item("spot18", 920, 290, "scene_18");
+		create_map_item("spot19", 920, 290, "scene_19");
+		create_map_item("spot20", 920, 290, "scene_20");
+		create_map_item("spot21", 920, 290, "scene_21");
+		create_map_item("spot22", 920, 290, "scene_22");
+		create_map_item("spot23", 920, 290, "scene_23");
+		create_map_item("spot24", 920, 290, "scene_24");
+		create_map_item("spot25", 920, 290, "scene_25");
+		create_map_item("spot26", 920, 290, "scene_26");
+		create_map_item("spot27", 920, 290, "scene_27");
+		create_map_item("spot28", 920, 290, "scene_28");
+		create_map_item("spot29", 920, 290, "scene_29");
+		create_map_item("spot30", 920, 290, "scene_30");
+	</action> -->
+
+	<!-- <action name="create_map_item" args="spot, spotX, spotY, scene">
+		addlayer(%1);
+		set(layer[%1].style, "mapspot");
+		set(layer[%1].x, %2);
+		set(layer[%1].y, %3);
+		set(layer[%1].zorder, 1);
+		set(layer[%1].onclick, mapspot_loadscene(%4););
+		js(console.log(get(layer[%1].onclick)));
+	</action> -->
+
+
+
+
+
+	<!-- Spots on maps -->
+	<layer name="spot1" style="mapspot" x="920" y="290" zorder="1" onclick="mapspot_loadscene(scene_1);" onhover="showtext('Lorem ipsum', spot_message)" />
+	<layer name="spot2" style="mapspot" x="700" y="590" zorder="1" onclick="mapspot_loadscene(scene_2);" onhover="showtext('Lorem ipsum 2', spot_message)"/>
+	<layer name="spot3" style="mapspot" x="1200" y="590" zorder="1" onclick="mapspot_loadscene(scene_3);" />
+	<layer name="spot4" style="mapspot" x="1320" y="590" zorder="1" onclick="mapspot_loadscene(scene_4);" />
+	<layer name="spot5" style="mapspot" x="1400" y="560" zorder="1" onclick="mapspot_loadscene(scene_5);" />
+	<layer name="spot6" style="mapspot" x="1750" y="465" zorder="1" onclick="mapspot_loadscene(scene_6);" />
+	<layer name="spot7" style="mapspot" x="1500" y="465" zorder="1" onclick="mapspot_loadscene(scene_7);" />
+	<layer name="spot8" style="mapspot" x="1300" y="200" zorder="1" onclick="mapspot_loadscene(scene_8);" />
+	<layer name="spot9" style="mapspot" x="1500" y="120" zorder="1" onclick="mapspot_loadscene(scene_9);" />
+	<!-- <layer name="spot10" style="mapspot" x="855" y="550" zorder="1" onclick="mapspot_loadscene(scene_10);" />
+	<layer name="spot11" style="mapspot" x="920" y="550" zorder="1" onclick="mapspot_loadscene(scene_11);" />
+	<layer name="spot12" style="mapspot" x="1000" y="550" zorder="1" onclick="mapspot_loadscene(scene_12);" />
+	<layer name="spot13" style="mapspot" x="1000" y="620" zorder="1" onclick="mapspot_loadscene(scene_13);" />
+	<layer name="spot14" style="mapspot" x="1000" y="420" zorder="1" onclick="mapspot_loadscene(scene_14);" />
+	<layer name="spot15" style="mapspot" x="1120" y="420" zorder="1" onclick="mapspot_loadscene(scene_15);" />
+	<layer name="spot16" style="mapspot" x="1120" y="550" zorder="1" onclick="mapspot_loadscene(scene_16);" />
+	<layer name="spot17" style="mapspot" x="1120" y="620" zorder="1" onclick="mapspot_loadscene(scene_17);" />
+	<layer name="spot18" style="mapspot" x="1250" y="620" zorder="1" onclick="mapspot_loadscene(scene_18);" />
+	<layer name="spot19" style="mapspot" x="1400" y="620" zorder="1" onclick="mapspot_loadscene(scene_19);" />
+	<layer name="spot20" style="mapspot" x="1400" y="550" zorder="1" onclick="mapspot_loadscene(scene_20);" />
+	<layer name="spot21" style="mapspot" x="1250" y="550" zorder="1" onclick="mapspot_loadscene(scene_21);" />
+	<layer name="spot22" style="mapspot" x="1250" y="420" zorder="1" onclick="mapspot_loadscene(scene_22);" />
+	<layer name="spot23" style="mapspot" x="1400" y="420" zorder="1" onclick="mapspot_loadscene(scene_23);" />
+	<layer name="spot24" style="mapspot" x="1480" y="420" zorder="1" onclick="mapspot_loadscene(scene_24);" />
+	<layer name="spot25" style="mapspot" x="1640" y="420" zorder="1" onclick="mapspot_loadscene(scene_25);" />
+	<layer name="spot27" style="mapspot" x="1640" y="500" zorder="1" onclick="mapspot_loadscene(scene_27);" />
+	<layer name="spot28" style="mapspot" x="1640" y="580" zorder="1" onclick="mapspot_loadscene(scene_28);" />
+	<layer name="spot29" style="mapspot" x="1800" y="350" zorder="1" onclick="mapspot_loadscene(scene_29);" />
+	<layer name="spot30" style="mapspot" x="1800" y="450" zorder="1" onclick="mapspot_loadscene(scene_30);" /> -->
+
+	
+
+	<!-- action for loading the scene when clicking on the map spots -->
+	<action name="mapspot_loadscene">
+		if(layer[map].scale GT 0.25,
+		<!-- special mode for zoomed map: hide big map, loadscene, show small map -->
+		set(layer[map].enabled, false);
+		tween(layer[map].alpha, 0.0, 0.25, default,
+		loadscene(%1, null, MERGE, BLEND(1));
+
+		set(layer[map].onclick, openmap(); );
+		layer[map].changeorigin(righttop,righttop);
+		scalesmall();
+
+		set(events[sceneload].onloadcomplete,
+		delayedcall(1,
+		tween(layer[map].alpha, 1.0, 0.5, default, set(layer[map].enabled, true); );
+		);
+		);
+		);
+		,
+		<!-- small map: just load the scene -->
+		loadscene(%1, null, MERGE, BLEND(1));
+		);
+	</action>
+
+
+	<!-- radar layer (overlays the normal spot too, but is behind the activespot image) -->
+	<layer name="radar" keep="true"
+		   url.flash="%VIEWER%/plugins/radar.swf"
+		   url.html5="%VIEWER%/plugins/radar.js"
+		   align="center" zorder="0"
+		   scale.mobile="1.5"
+		   fillalpha="0.6" fillcolor="0x544C4A"
+		   linewidth="1.0" linecolor="0xE0E0A0" linealpha="0.5"
+
+	/>
+
+	<!-- hotspot styles (black and white hotspots) -->
+	<style name="hotspot_ani_black"
+		   url="../skin/hotspot_ani_black_64x64x20.png"
+		   crop="0|0|64|64"
+		   frames="20" framewidth="64" frameheight="64" frame="0"
+		   onloaded="hotspot_animate();"
+	/>
+
+	<style name="hotspot_ani_white"
+		   url="../skin/hotspot_ani_white_64x64x20.png"
+		   crop="0|0|64|64"
+		   frames="20" framewidth="5%" frameheight="5%" frame="0"
+		   onloaded="hotspot_animate();"
+	/>
+
+	<!-- hotspot animation code -->
+	<action name="hotspot_animate">
+		if(loaded,
+			inc(frame,1,get(frames),0);
+			mul(ypos,frame,frameheight);
+			txtadd(crop,'0|',get(ypos),'|',get(framewidth),'|',get(frameheight));
+			delayedcall(0.03, hotspot_animate() );
+		);
+	</action>
+</krpano>

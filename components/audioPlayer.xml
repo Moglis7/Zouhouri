@@ -1,0 +1,110 @@
+
+<krpano ap_audio='./kampanopetra_speech.mp3' ap_urlPlay="./UI/soundOn.png" ap_urlPause="./UI/soundPause.png" ap_paused="false" ap_name="k_audio">  
+  <plugin name="soundinterface"
+	        url.flash="%VIEWER%/plugins/soundinterface.swf"
+	        url.html5="%VIEWER%/plugins/soundinterface.js"
+	        rootpath=""
+	        preload="true"
+	        keep="true"
+            volume="1.0"
+            autopause="false"
+   />
+   
+   <layer name="audio_player" keep="true" 
+        style="tooltip" type="image" url="../UI/soundOn.png" 
+        onloaded="audio_resize();" visible="false" tooltip="Pause / Play"       
+   />  
+   
+   <action name="audio_ready">        
+        
+   </action>   
+    
+    <action name="audio_resize">
+        if(layer[audio_player],
+            if (device.mobile, 
+                set(layer[audio_player].scale, 0.2);
+            , 
+                set(layer[audio_player].scale, 0.3);
+            );
+
+            if( (stagewidth GT stageheight),
+                tween(layer[audio_player].x, 2%);
+			    tween(layer[audio_player].y, 4%);
+            , 
+                tween(layer[audio_player].x, 4%);
+			    tween(layer[audio_player].y, 2%);
+            );
+            
+        );        
+    </action>    
+    
+    <action name="toggle_audio_img">
+        switch(ap_paused, true, false);
+        <!-- switch(layer[audio_player].tooltip,"Play" , "Pause"); -->
+        if(ap_paused,          
+                set(layer[audio_player].url, get(ap_urlPause));
+                ,        
+                set(layer[audio_player].url, get(ap_urlPlay));     
+        );      
+        
+    </action>
+    
+    <action name="open_audio">
+        <!-- Check if the video is minimized to put it back to full screen before closing -->
+        if(layer[videoplayer_bg], if_minimized(); videoplayer_close(););
+
+        <!-- Start The audio -->
+        if(layer[audio_player],
+            streamsound(get(ap_name), get(ap_audio), false);
+            set(events[audio_player].onresize, audio_resize());
+            set(layer[audio_player].onclick, pausesoundtoggle(k_audio);  toggle_audio_img(); );
+            set(sound[get(ap_name)].oncomplete, close_audio(););
+            set(layer[audio_player].visible, true);           
+            
+            <!-- addlayer(timebar);
+            set(layer[timebar].parent, layer[audio_player]);
+            set(layer[timebar].type, image);
+            set(layer[timebar].parent, "");
+            set(layer[timebar].url, gris.jpg);
+            set(layer[timebar].keep, true);
+            set(layer[timebar].visible, true);
+            set(layer[timebar].align, lefttop);
+            set(layer[timebar].width, 50);
+            set(layer[timebar].zorder, 50);
+            set(layer[timebar].x, 30);
+            set(layer[timebar].y, 20);
+            set(layer[timebar].height, 10);
+            set(layer[timebar].backgroundcolor, 0x000000);
+            set(layer[timebar].border, 1);
+            set(layer[timebar].bordercolor, 0xffffff);
+            set(layer[timebar].onhover, updateTimeBar(););
+            set(layer[timebar].onclick, seekAudio();); -->
+            
+            <!-- pausesoundtoggle(k_audio);   switch(ap_paused, true, false); js(console.log(get(ap_paused));); toggle_audio_img(); -->
+        );               
+    </action>
+
+    <!-- closes the audio and handles the visibility of buttons -->
+    <action name="close_audio">
+        destroysound(get(ap_name));
+        set(layer[audio_player].visible, false);
+        set(hotspot[audio_btn].visible, true);
+    </action>
+
+    <!-- <action name="updateTimeBar">
+        <set name="timebar.text" value="text(Current time: %1s, soundinterface.getCurrentTime().toFixed(2))" />
+    </action>
+    <action name="seekAudio">
+        <set name="seekPosition" value="soundinterface.getDuration() * (mouse.x / timebar.width)" />
+        <plugin name="soundinterface" command="seek(%1)" arg1="seekPosition" />
+    </action> -->
+
+
+    <!-- <action name="updateTimeBar" onhover="js(timebar.innerHTML = soundinterface.getCurrentTime().toFixed(2); + 's')" />
+    <action name="seekAudio" onclick="js(soundinterface.seek(soundinterface.getDuration(); * (event.x / timebar.width)))" /> -->
+    
+    
+    
+  
+</krpano>
+

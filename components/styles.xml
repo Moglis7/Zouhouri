@@ -1,0 +1,141 @@
+
+<krpano>
+
+    <!-- tooltips textstyle -->
+	<textstyle name="spot_message"
+			font="Arial" 
+			fontsize="16"
+			bold="false" 			
+			italic="false" 
+			background="true"
+            backgroundcolor="0xFFFFFF" 
+			backgroundalpha="1.0"
+			padding="4"
+			border="false"
+			bordercolor="0x000000"
+			borderalpha="1.0"
+			textcolor="0x000000" 
+			roundedge="5"			
+			fadeintime="0.1"
+			fadetime="0.05" />
+	<!-- effect="dropshadow(1,45,0x000000,4,1);"  -->
+  
+    <style name="infospot"
+        keep="false"
+        type="image"
+        url="../UI/planet_button.png" 
+        css="font-size:60px;text-align:center;"
+        vcenter="true"
+        width="70"
+        height="100"
+        scale="1"
+        bgroundedge="36"
+        bgborder="2 0x000000 1"
+        bgshadow="0 0 5 0xFFFFFF 1.0"
+        oversampling="2"
+        mipmapping="true"
+        depth="0"
+        depthbuffer="true"
+        zorder="2"
+        zoom="true"
+        torigin="world"
+        autoalpha="true"
+        alpha="0.0"
+        onloaded.addevent="delayedcall(0.2,tween(alpha,1));"
+        onover.addevent="tween(scale,1.2,0.2,easeoutback); tween(alpha,1);"
+        onout.addevent="if(enabled, tween(scale,1,0.2); tween(alpha,1); )"
+    />
+		   
+	<style name="infospotimage"
+        keep="false"
+        type="image"
+        css="color:#000000;font-size:30px;text-align:center;"
+        bgborder="1"
+        bgroundedge="10"
+        vcenter="true"
+        scale="0.7"
+        bgcolor="0xFFFFFF"
+        padding="6 12" 
+        oversampling="2"
+        mipmapping="true"
+        depth="0"
+        depthbuffer="true"
+        distorted="true"
+        torigin="world"
+        enabled="true"
+        autoalpha="true"
+        alpha="0.0" 
+        handcursor="true"
+        zorder="3"
+    /> 
+
+    <style name="infotext"
+        keep="false"
+        type="text"
+        css="color:#000000;font-size:20px;text-align:justify;"
+        bgborder="1"
+        bgroundedge="10"
+        vcenter="true"
+        scale="0.2"
+        zorder="2"
+        bgcolor="0xFFFFFF"
+        padding="6 12"
+        oversampling="2"
+        mipmapping="true"
+        depth="0"
+        depthbuffer="true"
+        distorted="true" 
+        torigin="world"
+        enabled="false"
+        autoalpha="true"
+        alpha="0.0"
+    />
+
+
+    <action name="show_info_text"
+	        scope="local"
+	        args="targetscene,infoelement,x,y,z,h,v,fov"> 
+		<!-- set(caller.enabled, false); -->
+	    <!-- tween(caller.alpha, 0.0); -->
+
+		calc(targetmovecall, 'webvr_lookto('+h+','+v+',2.0,easeinoutsine);tween(view.tx|view.ty|view.tz|view.fov,'+x+'|'+y+'|'+z+'|'+fov+',2.0,easeinoutsine);');
+		if(xml.scene != targetscene,
+			copy(global.customtransition, targetmovecall);
+			tour_loadscene(get(targetscene));
+		  ,
+			targetmovecall();
+		);
+
+		if(infoelement != null, 
+			delayedcall(0, 
+				tween(hotspot[get(infoelement)].alpha, 1.0, 1.0);
+			);
+		);
+
+		delayedcall(2.2,
+			set(hasmoved, false);
+			set(startpos, x=get(view.tx), y=get(view.ty), z=get(view.tz));
+			asyncloop(hasmoved == false,
+				calc(d, sqrt((view.tx-startpos.x)^2 + (view.ty-startpos.y)^2 + (view.tz-startpos.z)^2) );
+				if(d GT 50,
+					set(hasmoved, true);
+				);
+			  ,
+				if(infoelement != null,
+					tween(hotspot[get(infoelement)].alpha, 0.0, 0.5, default,
+						tween(caller.alpha, 0.5);
+						set(caller.enabled, true);
+					);
+				  ,
+					tween(caller.alpha, 0.5); 
+					set(caller.enabled, true);
+				);
+			);
+		);
+	</action>
+
+
+
+  
+</krpano>
+
