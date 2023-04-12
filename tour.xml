@@ -85,7 +85,7 @@
 
 
 	
-	<scene name="scene_2_blured" title="2 blured" onstart="" thumburl="panos/2_blured.tiles/thumb.jpg" lat="34.91179167" lng="33.63603333" heading="0.0">
+	<scene name="scene_2_blured" title="2 blured" onstart="updateradar();" thumburl="panos/2_blured.tiles/thumb.jpg" lat="34.91179167" lng="33.63603333" heading="0.0">
 		
 		<control bouncinglimits="calc:image.cube ? true : false" />
 
@@ -99,9 +99,16 @@
 		<hotspot name="spot1" style="skin_hotspotstyle" ath="-29.221" atv="30.127" linkedscene="scene_3" />
 		<hotspot name="spot2" style="skin_hotspotstyle" ath="34.008" atv="27.337" linkedscene="scene_4" />
 
+		<action name="updateradar">
+			set(layer[activespot].parent, spot1);
+			set(layer[radar].parent, spot1);
+			set(layer[radar].heading, 265);
+			set(layer[radar].enabled, false);
+		</action>
+
 	</scene>
 
-	<scene name="scene_3" title="3" onstart="" thumburl="panos/3.tiles/thumb.jpg" lat="34.91203611" lng="33.63608056" heading="0.0">
+	<scene name="scene_3" title="3" onstart="updateradar();" thumburl="panos/3.tiles/thumb.jpg" lat="34.91203611" lng="33.63608056" heading="0.0">
 		
 		<control bouncinglimits="calc:image.cube ? true : false" />
 
@@ -114,9 +121,17 @@
 		</image>
 		<hotspot name="spot1" style="skin_hotspotstyle" ath="147.016" atv="35.348" linkedscene="scene_2_blured" />
 
+		<action name="updateradar">
+			set(layer[activespot].parent, spot2);
+			set(layer[radar].parent, spot2);
+			set(layer[radar].heading, 0);
+			set(layer[radar].enabled, false);
+		</action>
+
+
 	</scene>
 
-	<scene name="scene_4" title="4" onstart="" thumburl="panos/4.tiles/thumb.jpg" lat="34.91197778" lng="33.63601111" heading="0.0">
+	<scene name="scene_4" title="4" onstart="updateradar();" thumburl="panos/4.tiles/thumb.jpg" lat="34.91197778" lng="33.63601111" heading="0.0">
 		
 		<control bouncinglimits="calc:image.cube ? true : false" />
 
@@ -130,9 +145,16 @@
 		<hotspot name="spot1" style="skin_hotspotstyle" ath="-147.649" atv="36.343" linkedscene="scene_2_blured" />
 		<hotspot name="spot2" style="skin_hotspotstyle" ath="-6.261" atv="35.618" linkedscene="scene_5" />
 
+		<action name="updateradar">
+			set(layer[activespot].parent, spot3);
+			set(layer[radar].parent, spot3);
+			set(layer[radar].heading, 0);
+			set(layer[radar].enabled, false);
+		</action>
+
 	</scene>
 
-	<scene name="scene_5" title="5" onstart="" thumburl="panos/5.tiles/thumb.jpg" lat="34.91183333" lng="33.63602778" heading="0.0">
+	<scene name="scene_5" title="5" onstart="updateradar();" thumburl="panos/5.tiles/thumb.jpg" lat="34.91183333" lng="33.63602778" heading="0.0">
 		
 		<control bouncinglimits="calc:image.cube ? true : false" />
 
@@ -147,9 +169,16 @@
 		<hotspot name="spot2" style="skin_hotspotstyle" ath="41.922" atv="20.341" linkedscene="scene_9" />
 		<hotspot name="spot3" style="skin_hotspotstyle" ath="-40.382" atv="23.851" linkedscene="scene_6" />
 
+		<action name="updateradar">
+			set(layer[activespot].parent, spot4);
+			set(layer[radar].parent, spot4);
+			set(layer[radar].heading, 0);
+			set(layer[radar].enabled, false);
+		</action>
+
 	</scene>
 
-	<scene name="scene_6" title="6" onstart="" thumburl="panos/6.tiles/thumb.jpg" lat="34.91168889" lng="33.63600000" heading="0.0">
+	<scene name="scene_6" title="6" onstart="updateradar();" thumburl="panos/6.tiles/thumb.jpg" lat="34.91168889" lng="33.63600000" heading="0.0">
 		
 		<control bouncinglimits="calc:image.cube ? true : false" />
 
@@ -163,9 +192,17 @@
 		<hotspot name="spot1" style="skin_hotspotstyle" ath="5.732" atv="32.143" linkedscene="scene_7" />
 		<hotspot name="spot2" style="skin_hotspotstyle" ath="95.833" atv="34.362" linkedscene="scene_5" linkedscene_lookat="220,5,120" />
 
+		<action name="updateradar">
+			set(layer[activespot].parent, spot5);
+			set(layer[radar].parent, spot5);
+			set(layer[radar].heading, 0);
+			set(layer[radar].enabled, false);
+		</action>
+
 	</scene>
 
-	<scene name="scene_7" title="7" onstart="" thumburl="panos/7.tiles/thumb.jpg" lat="34.91174444" lng="33.63607500" heading="0.0">
+	<scene name="scene_7" title="7" onstart="updateradar();" thumburl="panos/7.tiles/thumb.jpg" lat="34.91174444" lng="33.63607500" heading="0.0">
+
 		
 		<control bouncinglimits="calc:image.cube ? true : false" />
 
@@ -178,9 +215,16 @@
 		</image>
 		<hotspot name="spot1" style="skin_hotspotstyle" ath="-178.001" atv="34.029" linkedscene="scene_6" linkedscene_lookat="90,5,120" />
 
+		<action name="updateradar">
+			set(layer[activespot].parent, spot6);
+			set(layer[radar].parent, spot6);
+			set(layer[radar].heading, 0);
+			set(layer[radar].enabled, false);
+		</action>
+
 	</scene>
 
-	<scene name="scene_8" title="8" onstart="" thumburl="panos/8.tiles/thumb.jpg" lat="34.91170833" lng="33.63602222" heading="0.0">
+	<scene name="scene_8" title="8" onstart="updateradar();" thumburl="panos/8.tiles/thumb.jpg" lat="34.91170833" lng="33.63602222" heading="0.0">
 		
 		<control bouncinglimits="calc:image.cube ? true : false" />
 
@@ -192,9 +236,16 @@
 			<cube url="panos/8.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,1792,3584" />
 		</image>
 
+		<action name="updateradar">
+			set(layer[activespot].parent, spot7);
+			set(layer[radar].parent, spot7);
+			set(layer[radar].heading, 0);
+			set(layer[radar].enabled, false);
+		</action>
+
 	</scene>
 
-	<scene name="scene_9" title="9" onstart="" thumburl="panos/9.tiles/thumb.jpg" lat="34.91174167" lng="33.63601111" heading="0.0">
+	<scene name="scene_9" title="9" onstart="updateradar();" thumburl="panos/9.tiles/thumb.jpg" lat="34.91174167" lng="33.63601111" heading="0.0">
 		
 		<control bouncinglimits="calc:image.cube ? true : false" />
 
@@ -206,6 +257,14 @@
 			<cube url="panos/9.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,1792,3584" />
 		</image>
 		<hotspot name="spot1" style="skin_hotspotstyle" ath="-178.812" atv="29.569" linkedscene="scene_5" linkedscene_lookat="220,5,120" />
+
+
+		<action name="updateradar">
+			set(layer[activespot].parent, spot8);
+			set(layer[radar].parent, spot8);
+			set(layer[radar].heading, 0);
+			set(layer[radar].enabled, false);
+		</action>
 
 	</scene>
 
