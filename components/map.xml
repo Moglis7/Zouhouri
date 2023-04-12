@@ -384,15 +384,15 @@
 
 
 	<!-- Spots on maps -->
-	<layer name="spot1" style="mapspot" x="1850" y="650" zorder="1" onclick="mapspot_loadscene(scene_1);" /> onhover="showtext('Lorem ipsum', spot_message)" 
-	<layer name="spot2" style="mapspot" x="700" y="590" zorder="1" onclick="mapspot_loadscene(scene_2);" /> onhover="showtext('Lorem ipsum 2', spot_message)"
-	<layer name="spot3" style="mapspot" x="1200" y="590" zorder="1" onclick="mapspot_loadscene(scene_3);" />
-	<layer name="spot4" style="mapspot" x="1320" y="590" zorder="1" onclick="mapspot_loadscene(scene_4);" />
-	<layer name="spot5" style="mapspot" x="1400" y="560" zorder="1" onclick="mapspot_loadscene(scene_5);" />
-	<layer name="spot6" style="mapspot" x="1750" y="465" zorder="1" onclick="mapspot_loadscene(scene_6);" />
-	<layer name="spot7" style="mapspot" x="1500" y="465" zorder="1" onclick="mapspot_loadscene(scene_7);" />
-	<layer name="spot8" style="mapspot" x="1300" y="200" zorder="1" onclick="mapspot_loadscene(scene_8);" />
-	<layer name="spot9" style="mapspot" x="1500" y="120" zorder="1" onclick="mapspot_loadscene(scene_9);" />
+	<layer name="spot1" style="mapspot" x="1850" y="650" zorder="1" onclick="mapspot_loadscene(scene_2_blured);" /> onhover="showtext('Lorem ipsum', spot_message)" 
+	<layer name="spot2" style="mapspot" x="1400" y="1200" zorder="1" onclick="mapspot_loadscene(scene_3);" /> onhover="showtext('Lorem ipsum 2', spot_message)"
+	<layer name="spot3" style="mapspot" x="1400" y="150" zorder="1" onclick="mapspot_loadscene(scene_4);" />
+	<layer name="spot4" style="mapspot" x="1050" y="150" zorder="1" onclick="mapspot_loadscene(scene_5);" />
+	<layer name="spot5" style="mapspot" x="850" y="825" zorder="1" onclick="mapspot_loadscene(scene_6);" />
+	<layer name="spot6" style="mapspot" x="550" y="825" zorder="1" onclick="mapspot_loadscene(scene_7);" />
+	<!-- <layer name="spot7" style="mapspot" x="1500" y="465" zorder="1" onclick="mapspot_loadscene(scene_8);" /> -->
+	<layer name="spot8" style="mapspot" x="200"  y="150" zorder="1" onclick="mapspot_loadscene(scene_9);" />
+	<!-- <layer name="spot9" style="mapspot" x="1500" y="120" zorder="1" onclick="mapspot_loadscene(scene_9);" />  -->
 	<!-- <layer name="spot10" style="mapspot" x="855" y="550" zorder="1" onclick="mapspot_loadscene(scene_10);" />
 	<layer name="spot11" style="mapspot" x="920" y="550" zorder="1" onclick="mapspot_loadscene(scene_11);" />
 	<layer name="spot12" style="mapspot" x="1000" y="550" zorder="1" onclick="mapspot_loadscene(scene_12);" />
