@@ -102,7 +102,7 @@
 		<action name="updateradar">
 			set(layer[activespot].parent, spot1);
 			set(layer[radar].parent, spot1);
-			set(layer[radar].heading, 265);
+			set(layer[radar].heading, 180);
 			set(layer[radar].enabled, false);
 		</action>
 
@@ -124,7 +124,7 @@
 		<action name="updateradar">
 			set(layer[activespot].parent, spot2);
 			set(layer[radar].parent, spot2);
-			set(layer[radar].heading, 0);
+			set(layer[radar].heading, 180);
 			set(layer[radar].enabled, false);
 		</action>
 
@@ -148,7 +148,7 @@
 		<action name="updateradar">
 			set(layer[activespot].parent, spot3);
 			set(layer[radar].parent, spot3);
-			set(layer[radar].heading, 0);
+			set(layer[radar].heading, 180);
 			set(layer[radar].enabled, false);
 		</action>
 
@@ -172,7 +172,7 @@
 		<action name="updateradar">
 			set(layer[activespot].parent, spot4);
 			set(layer[radar].parent, spot4);
-			set(layer[radar].heading, 0);
+			set(layer[radar].heading, 150);
 			set(layer[radar].enabled, false);
 		</action>
 
@@ -195,7 +195,7 @@
 		<action name="updateradar">
 			set(layer[activespot].parent, spot5);
 			set(layer[radar].parent, spot5);
-			set(layer[radar].heading, 0);
+			set(layer[radar].heading, 180);
 			set(layer[radar].enabled, false);
 		</action>
 
@@ -218,7 +218,7 @@
 		<action name="updateradar">
 			set(layer[activespot].parent, spot6);
 			set(layer[radar].parent, spot6);
-			set(layer[radar].heading, 0);
+			set(layer[radar].heading, 180);
 			set(layer[radar].enabled, false);
 		</action>
 
@@ -239,7 +239,7 @@
 		<action name="updateradar">
 			set(layer[activespot].parent, spot7);
 			set(layer[radar].parent, spot7);
-			set(layer[radar].heading, 0);
+			set(layer[radar].heading, 180);
 			set(layer[radar].enabled, false);
 		</action>
 
@@ -262,7 +262,7 @@
 		<action name="updateradar">
 			set(layer[activespot].parent, spot8);
 			set(layer[radar].parent, spot8);
-			set(layer[radar].heading, 0);
+			set(layer[radar].heading, 180);
 			set(layer[radar].enabled, false);
 		</action>
 
