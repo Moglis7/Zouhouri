@@ -5,6 +5,10 @@
 		fsButtonMin="./UI/MIN.png" 
 		fsX="-70"
 		fsY="500"
+		mapScaleSmall="0.25"
+		mapScaleFull="1"
+		fsScaleBig="0.75"
+		fsScaleSmall="2"
 		>	
 	
 	<textstyle name="message2"
@@ -50,15 +54,6 @@
            />
 
 
-	<!-- the map spot images -->
-	<style name="mapspot" keep="true" url="get:mapSpot" scale="0.13" parent="map" align="lefttop" edge="center" scale.mobile="0.1" />
-	<style name="fsButton" keep="true" url="get:fsButtonMax" scale="3"  parent="map" align="lefttop" edge="center" scale.mobile="3" onclick="openmap();" />
-		<!-- active spot image (overlays the normal spot) -->
-	<layer name="activespot" url="get:activeSpot" keep="true" align="lefttop" zorder="2" scale="0.13" scale.mobile="0.1"/>
-
-		<!-- full screen btn on map -->
-	<layer name="fs" style="fsButton|tooltip" tooltip="Expand" x="get:fsX" y="get:fsY" zorder="1"  />
-
 	<!-- the map image -->
 	<layer name="map" url="get:mapImage" keep="true" handcursor="false" capture="false"
 		align="righttop"
@@ -67,9 +62,21 @@
 		onloaded="scalesmall(); "
 	/> 
 
+	<!-- the map spot images -->
+	<style name="mapspot" keep="true" url="get:mapSpot" scale="0.13" parent="map" align="lefttop" edge="center" scale.mobile="0.1" />
+	<style name="fsButton" keep="true" url="get:fsButtonMax" scale="0.25"  parent="map" align="lefttop" edge="center" scale.mobile="3" onclick="openmap();" />
+		<!-- active spot image (overlays the normal spot) -->
+	<layer name="activespot" url="get:activeSpot" keep="true" align="lefttop" zorder="2" scale="0.13" scale.mobile="0.1"/>
+
+		<!-- full screen btn on map -->
+	<layer name="fs" style="fsButton|tooltip" tooltip="Expand" x="get:fsX" y="get:fsY" zorder="1"  />
+
+
+
 	<!-- Scales small map -->
 	<action name="scalesmall">
-		set(layer[map].scale, 0.25);
+		set(layer[map].scale, get(mapScaleSmall));
+		set(layer[fs].scale, get(fsScaleSmall));
 		
 		if (			
 			device.desktop, <!-- Desktop -->
@@ -131,7 +138,7 @@
 		set(layer[fs].onclick, closemap(););
 		set(layer[fs].url, get(fsButtonMin));
 		set(layer[fs].tooltip, "Scale Down");
-		set(layer[fs].scale, 1);
+
 		
 		<!-- trace('rotate = ', layer[map].rotate); -->
 
@@ -192,6 +199,7 @@
 			set(layer[map].rotate, 0);	
 			
 		);	
+		set(layer[fs].scale, get(fsScaleBig));
 	</action>
 
 	<!-- map closing - scale the map back to 0.25 of its image pixelsize -->
@@ -200,7 +208,7 @@
 		set(layer[fs].onclick, openmap(); );
 		set(layer[fs].url, get(fsButtonMax));
 		set(layer[fs].tooltip, "Expand");
-		set(layer[fs].scale, 3);
+		set(layer[fs].scale, get(fsScaleSmall));
 		<!-- set the map in the righttop of the screen --> 
 		layer[map].changeorigin(righttop,righttop);
 
