@@ -31,8 +31,8 @@
                 tween(layer[audio_player].x, 2%);
 			    tween(layer[audio_player].y, 4%);
             , 
-                tween(layer[audio_player].x, 4%);
-			    tween(layer[audio_player].y, 2%);
+                tween(layer[audio_player].x, 6%);
+			    tween(layer[audio_player].y, 4%);
             );
             
         );        

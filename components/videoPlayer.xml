@@ -174,7 +174,7 @@
 			removelayer(videoplayer_plugin);
 			removelayer(videoplayer_bg);
 			removelayer(videoplayer_close);	
-			set(hotspot[play_btn].visible, true);		
+			if(!webvr.isenabled, set(hotspot[play_btn].visible, true););		
 		); 
         <!-- removelayer(videoplayer_plugin);
 		removelayer(videoplayer_bg); -->

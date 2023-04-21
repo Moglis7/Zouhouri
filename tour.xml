@@ -83,6 +83,46 @@
 	<include url="skin/vtourskin_design_117round.xml"    />
 	<!-- <include url="skin/vtourskin_design_black.xml"       /> -->
 
+	<!--Start code for vr controll -->
+	<events name="toggle_VR_desktop" keep="true" webvr_onavailable="VR_check_if_desktop();" />
+	<action name="VR_check_if_desktop">
+		if (get(devicename) == "Desktop", 
+			set(layer[skin_btn_vr].visible, false);
+		);
+	</action>
+
+	<action name="closeDependencies_openVR">
+		webvr.enterVR();
+	    <!-- if(layer[videoplayer_bg], 
+			if_minimized(); 
+
+			set(events.[videoplayer_events].name, null);
+			if(layer[videoplayer_plugin], layer[videoplayer_plugin].pause());
+			set(layer[videoplayer_bg].onclick, null);
+			
+			tween(layer[videoplayer_plugin].scale, 0.0, 0.5, easeInBack);
+			tween(layer[videoplayer_close].scale, 0.0, 0.5, easeInBack);
+			tween(layer[videoplayer_bg].alpha, 0.0, 0.5, default,
+				removelayer(videoplayer_plugin);
+				removelayer(videoplayer_bg);
+				removelayer(videoplayer_close);	
+				webvr.enterVR();
+			);
+			,
+			webvr.enterVR();
+		); -->
+	</action>
+	
+	<action name="onExitVr_checkForVideo">
+		if(plugin[videoplayer_plugin], 
+			set(hotspot[play_btn].visible, false);
+			, 
+			set(hotspot[play_btn].visible, true);
+		)	
+	</action>
+	
+	<!-- End code for vr controll -->
+
 
 	
 	<scene name="scene_2_blured" title="2 blured" onstart="updateradar();" thumburl="panos/2_blured.tiles/thumb.jpg" lat="34.91179167" lng="33.63603333" heading="0.0">
