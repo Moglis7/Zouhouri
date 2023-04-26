@@ -144,53 +144,53 @@
 		         tx="150"
 		         ty="-150"
 		         tz="800" 
-		         onclick="show_info_text(scene_R0010168, info_image, -348,-49,-213, -90,0, 108); lookto(25,12,100 , smooth(100,100,200);"/> 
+		         onclick="show_info_text(scene_papri, info_image, -348,-49,-213, -90,0, 108); lookto(25,0,100 , smooth(100,100,200);"/> 
 
 		<hotspot name="info_image"
 		         style="infospotimage"
-		         tx="250"
+		         tx="650"
 		         ty="100"
-		         tz="600"
+		         tz="1200"
 		         ath="25"
-		         atv="10"   
-		         url="./UI/1.png"
+		         atv="0"   
+		         url="./UI/PULPIT.png"
 				 onclick="set(alpha, 0.0);"  
 				 />	 	
 
-		<hotspot name="info_button2"
+		<hotspot name="info_button1"
 		         style="infospot"
 		         tx="-100"
 		         ty="-150"
 		         tz="800" 
-		         onclick="show_info_text(scene_R0010168, info_image, -348,-49,-213, -90,0, 108); lookto(25,12,100 , smooth(100,100,200);"/> 
+		         onclick="show_info_text(scene_R0010168, info_image1, -348,-49,-213, -90,0, 108); lookto(-15,0,100 , smooth(100,100,200);"/> 
 
-		<hotspot name="info_image2"
+		<hotspot name="info_image1"
 		         style="infospotimage"
-		         tx="250"
-		         ty="100"
-		         tz="600"
-		         ath="25"
-		         atv="10"   
-		         url="./UI/1.png"
+		         tx="-450"
+		         ty="50"
+		         tz="1200"
+		         ath="-15"
+		         atv="0"   
+		         url="./UI/MIHRAB.png"
 				 onclick="set(alpha, 0.0);"  
 				 />	 	
 
 
-		<hotspot name="info_button3"
+		<hotspot name="info_button2"
 		         style="infospot"
 		         tx="85"
 		         ty="100"
 		         tz="800" 
-		         onclick="show_info_text(scene_R0010168, info_image, -348,-49,-213, -90,0, 108); lookto(25,12,100 , smooth(100,100,200);"/> 
+		         onclick="show_info_text(scene_R0010168, info_image2, -348,-49,-213, -90,0, 108); lookto(0,0,100 , smooth(100,100,200);"/> 
 
-		<hotspot name="info_image3"
+		<hotspot name="info_image2"
 		         style="infospotimage"
-		         tx="250"
+		         tx="0"
 		         ty="100"
-		         tz="600"
-		         ath="25"
-		         atv="10"   
-		         url="./UI/1.png"
+		         tz="1200"
+		         ath="0"
+		         atv="0"   
+		         url="./UI/PL.png"
 				 onclick="set(alpha, 0.0);"  
 				 />	 	
 
@@ -230,12 +230,12 @@
 
 		<hotspot name="info_image"
 		         style="infospotimage"
-		         tx="250"
-		         ty="100"
-		         tz="600"
+		         tx="600"
+		         ty="400"
+		         tz="2500"
 		         ath="25"
 		         atv="10"   
-		         url="./UI/1.png"
+		         url="./UI/EIGHT.png"
 				 onclick="set(alpha, 0.0);"  
 				 />	 	
 
@@ -268,37 +268,50 @@
 		         tx="-100"
 		         ty="-550"
 		         tz="-1000" 
-		         onclick="show_info_text(scene_R0010168, info_image, -348,-49,-213, -90,0, 108); lookto(25,12,100 , smooth(100,100,200);"/> 
+		         onclick="show_info_text(scene_R0010168, info_image, -348,-49,-213, -90,0, 108); lookto(-180,-7,100 , smooth(100,100,200);"/> 
 
 		<hotspot name="info_image"
 		         style="infospotimage"
-		         tx="-3500"
-		         ty="100"
-		         tz="600"
-		         ath="25"
-		         atv="10"   
-		         url="./UI/1.png"
+		         tx="0"
+		         ty="-350"
+		         tz="-2500"
+		         ath="180"
+		         atv="-7"   
+		         url="./UI/WL.png"
 				 onclick="set(alpha, 0.0);"  
 				 />	 	
 
 
-		<hotspot name="info_button2"
+		<hotspot name="info_button1"
 		         style="infospot"
 		         tx="-1000"
 		         ty="-500"
 		         tz="-550" 
-		         onclick="show_info_text(scene_R0010168, info_image, -348,-49,-213, -90,0, 108); lookto(25,12,100 , smooth(100,100,200);"/> 
+		         onclick="show_info_text(scene_R0010168, info_image1, -348,-49,-213, -90,0, 108);  show_info_text(scene_whatever, info_image2, -348,-49,-213, -90,0, 108 ); lookto(-110,0,110 , smooth(100,100,200);"/> 
+
+		<hotspot name="info_image1"
+		         style="infospotimage"
+		         tx="-1450"
+		         ty="100"
+		         tz="-250"
+		         ath="250"
+		         atv="0"   
+		         url="./UI/MOTM.png"
+				 onclick="set(alpha, 0.0);"  
+				 />	 
 
 		<hotspot name="info_image2"
 		         style="infospotimage"
-		         tx="200"
+		         tx="-900"
 		         ty="100"
-		         tz="600"
-		         ath="25"
-		         atv="10"   
-		         url="./UI/1.png"
+		         tz="-1550"
+		         ath="240"
+		         atv="0"   
+		         url="./UI/MOTM2.png"
 				 onclick="set(alpha, 0.0);"  
 				 />	 	
+
+		
 		<!-- End of section -->
 
 
@@ -371,6 +384,25 @@
 			<cube url="panos/7.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,1792,3584" />
 		</image>
 		<hotspot name="spot1" style="skin_hotspotstyle" ath="-178.001" atv="34.029" linkedscene="scene_6" linkedscene_lookat="90,5,120" />
+
+
+		<hotspot name="info_button"
+		         style="infospot"
+		         tx="480"
+		         ty="200"
+		         tz="800" 
+		         onclick="show_info_text(scene_R0010168, info_image, -348,-49,-213, -90,0, 108); lookto(0,0,110 , smooth(100,100,200);"/> 
+
+		<hotspot name="info_image"
+		         style="infospotimage"
+		         tx="100"
+		         ty="-130"
+		         tz="1000"
+		         ath="0"
+		         atv="0"   
+		         url="./UI/TOMB.png"
+				 onclick="set(alpha, 0.0);"  
+				 />	 
 
 		<action name="updateradar">
 			set(layer[activespot].parent, spot6);
