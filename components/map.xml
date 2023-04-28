@@ -6,7 +6,7 @@
 		fsX="260"
 		fsY="290"
 		mapAnimationScale="0.1"
-		divideLandscape="2.5" 
+		divideLandscape="4" 
 		dividePortrait="2" 
 		fsScaleBig="0.3"
 		fsScaleSmall="0.9"		
@@ -169,7 +169,7 @@
 			tween(layer[map].scale, get(bigscale));
 			set(layer[map].rotate, 0);	
 
-			,(device.mobile)  AND (!fullscreen), <!-- mobile  not fullscreen  -->			
+			,(device.mobile)  AND (!fullscreen), <!-- mobile  not fullscreen  -->
 			<!-- set the scale of the map for mobiles -->
 			div(bigscale, stagewidth, layer[map].imagewidth);
 			div(bigscale, get(bigscale), 1.05);
@@ -178,7 +178,7 @@
 			tween(layer[map].x, 0);
 			tween(layer[map].y, -5%);
 			tween(layer[map].scale, get(bigscale));
-			set(layer[map].rotate, 0);		
+			set(layer[map].rotate, 0);
 			
 			,(device.mobile AND fullscreen)  AND (stageheight GT stagewidth), <!-- mobile fullscreen portrait  -->
 			<!-- set the scale of the map for mobiles -->
