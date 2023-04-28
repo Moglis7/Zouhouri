@@ -4,7 +4,7 @@
 	<include url="components/styles.xml" />
 	<include url="skin/vtourskin.xml" />
 	<include url="components/videoPlayer.xml" />
-	<!--<include url="components/link.xml" /> -->
+	<include url="components/link.xml" />
 	<include url="components/book.xml" />
 	<include url="components/tooltips.xml" />
 	<include url="components/map.xml" />

@@ -2,7 +2,7 @@
 <krpano>
 	<action name="toogle_book_visibility">
 		set(varSc, get(scene[get(xml.scene)].name));
-		if(get(varSc) == "scene_1" OR get(varSc) == "scene_2" OR get(varSc) == "scene_3" OR get(varSc) == "scene_11" OR get(varSc) == "scene_22" OR  get(varSc) == "scene_27" OR get(varSc) == "scene_28" OR get(varSc) == "scene_18",
+		if(get(varSc) == "scene_2_blured" ,
 			set(layer[skin_btn_book].visible, true);
 		,
 			set(layer[skin_btn_book].visible, false);
