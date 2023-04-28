@@ -1,15 +1,15 @@
-<krpano mapImage="./skin/Zuhuri1.png" 
+<krpano mapImage="./skin/Zuhuri3.png" 
 		mapSpot="./skin/camicon.png" 
 		activeSpot="./skin/camicon_red.png" 
 		fsButtonMax="./UI/MAX.png" 
 		fsButtonMin="./UI/MIN.png" 
-		fsX="-120"
-		fsY="1200"
+		fsX="260"
+		fsY="290"
 		mapAnimationScale="0.1"
-		divideLandscape="4" 
+		divideLandscape="2.5" 
 		dividePortrait="2" 
-		fsScaleBig="1.5"
-		fsScaleSmall="5"		
+		fsScaleBig="0.3"
+		fsScaleSmall="0.9"		
 		>	
 	
 	<textstyle name="message2"
@@ -58,10 +58,10 @@
 	 
 
 	<!-- the map spot images -->
-	<style name="mapspot" keep="true" url="get:mapSpot" scale="0.17" parent="map" align="lefttop" edge="center" scale.mobile="0.1" />
+	<style name="mapspot" keep="true" url="get:mapSpot" scale="0.05" parent="map" align="lefttop" edge="center" scale.mobile="0.05" />
 	<style name="fsButton" keep="true" url="get:fsButtonMax" scale=""  parent="map" align="lefttop" edge="center" scale.mobile="3" onclick="openmap();" />
 		<!-- active spot image (overlays the normal spot) -->
-	<layer name="activespot" url="get:activeSpot" keep="true" align="lefttop" zorder="2" scale="0.17" scale.mobile="0.1"/>
+	<layer name="activespot" url="get:activeSpot" keep="true" align="lefttop" zorder="2" scale="0.05" scale.mobile="0.05"/>
 
 		<!-- full screen btn on map -->
 	<layer name="fs" style="fsButton|tooltip" tooltip="Expand" x="get:fsX" y="get:fsY" zorder="1"  />
@@ -107,8 +107,8 @@
 			div(smallscale, stagewidth, layer[map].imagewidth);			
 			div(smallscale, get(smallscale), get(dividePortrait));
 			tween(layer[map].scale, get(smallscale));
-			tween(layer[map].x, 1.5%);
-			tween(layer[map].y, 3%);
+			tween(layer[map].x, 3%);
+			tween(layer[map].y, 1.5%);
 			<!-- js(console.log('3')); -->
 			set(layer[map].rotate, 0);
 			,
@@ -220,7 +220,7 @@
 		if (			
 			device.desktop, <!-- Desktop -->
 			div(smallscale, stagewidth, layer[map].imagewidth);			
-			div(smallscale, get(smallscale), 4);
+			div(smallscale, get(smallscale), get(divideLandscape));
 			tween(layer[map].scale, get(smallscale));
 			tween(layer[map].x, 1.5%);
 			tween(layer[map].y, 3%);
@@ -250,7 +250,7 @@
 
 			(device.mobile AND !fullscreen) AND (stagewidth GT stageheight), <!-- mobile  not fullscreen  landscape -->
 			div(smallscale, stagewidth, layer[map].imagewidth);			
-			div(smallscale, get(smallscale), 4); 
+			div(smallscale, get(smallscale), get(divideLandscape)); 
 			tween(layer[map].scale, get(smallscale));
 			tween(layer[map].x, 3%);
 			tween(layer[map].y, 1.5%);
@@ -260,7 +260,7 @@
 
 			(device.mobile AND fullscreen) AND (stagewidth GE stageheight), <!-- mobile fullscreen landscape  -->
 			div(smallscale, stagewidth, layer[map].imagewidth);
-			div(smallscale, get(smallscale), 4);
+			div(smallscale, get(smallscale), get(divideLandscape));
 			js(console.log(get(smallscale)));
 			tween(layer[map].scale, get(smallscale));
 			tween(layer[map].x, 3%);
@@ -385,14 +385,14 @@
 
 
 	<!-- Spots on maps -->
-	<layer name="spot1" style="mapspot" x="1850" y="650" zorder="1" onclick="mapspot_loadscene(scene_2_blured);" /> onhover="showtext('Lorem ipsum', spot_message)" 
-	<layer name="spot2" style="mapspot" x="1400" y="1200" zorder="1" onclick="mapspot_loadscene(scene_3);" /> onhover="showtext('Lorem ipsum 2', spot_message)"
-	<layer name="spot3" style="mapspot" x="1400" y="150" zorder="1" onclick="mapspot_loadscene(scene_4);" />
-	<layer name="spot4" style="mapspot" x="1050" y="150" zorder="1" onclick="mapspot_loadscene(scene_5);" />
-	<layer name="spot5" style="mapspot" x="850" y="825" zorder="1" onclick="mapspot_loadscene(scene_6);" />
-	<layer name="spot6" style="mapspot" x="550" y="825" zorder="1" onclick="mapspot_loadscene(scene_7);" />
+	<layer name="spot1" style="mapspot" x="671" y="125" zorder="1" onclick="mapspot_loadscene(scene_2_blured);" /> onhover="showtext('Lorem ipsum', spot_message)" 
+	<layer name="spot2" style="mapspot" x="590" y="200" zorder="1" onclick="mapspot_loadscene(scene_3);" /> onhover="showtext('Lorem ipsum 2', spot_message)"
+	<layer name="spot3" style="mapspot" x="590" y="52" zorder="1" onclick="mapspot_loadscene(scene_4);" />
+	<layer name="spot4" style="mapspot" x="500" y="52" zorder="1" onclick="mapspot_loadscene(scene_5);" />
+	<layer name="spot5" style="mapspot" x="450" y="162" zorder="1" onclick="mapspot_loadscene(scene_6);" />
+	<layer name="spot6" style="mapspot" x="370" y="162" zorder="1" onclick="mapspot_loadscene(scene_7);" />
 	<!-- <layer name="spot7" style="mapspot" x="1500" y="465" zorder="1" onclick="mapspot_loadscene(scene_8);" /> -->
-	<layer name="spot8" style="mapspot" x="200"  y="150" zorder="1" onclick="mapspot_loadscene(scene_9);" />
+	<layer name="spot8" style="mapspot" x="260"  y="57" zorder="1" onclick="mapspot_loadscene(scene_9);" />
 	<!-- <layer name="spot9" style="mapspot" x="1500" y="120" zorder="1" onclick="mapspot_loadscene(scene_9);" />  -->
 	<!-- <layer name="spot10" style="mapspot" x="855" y="550" zorder="1" onclick="mapspot_loadscene(scene_10);" />
 	<layer name="spot11" style="mapspot" x="920" y="550" zorder="1" onclick="mapspot_loadscene(scene_11);" />
@@ -447,7 +447,8 @@
 		   url.flash="%VIEWER%/plugins/radar.swf"
 		   url.html5="%VIEWER%/plugins/radar.js"
 		   align="center" zorder="0"
-		   scale.mobile="1.5"
+		   scale= "0.4"
+		   scale.mobile="0.4"
 		   fillalpha="0.6" fillcolor="0x544C4A"
 		   linewidth="1.0" linecolor="0xE0E0A0" linealpha="0.5"
 
