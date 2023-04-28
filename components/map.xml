@@ -5,10 +5,11 @@
 		fsButtonMin="./UI/MIN.png" 
 		fsX="-120"
 		fsY="1200"
-		mapScaleSmall="0.8"
-		mapScaleFull="1.5"
+		mapAnimationScale="0.1"
+		divideLandscape="4" 
+		dividePortrait="2" 
 		fsScaleBig="1.5"
-		fsScaleSmall="5"
+		fsScaleSmall="5"		
 		>	
 	
 	<textstyle name="message2"
@@ -58,7 +59,7 @@
 
 	<!-- the map spot images -->
 	<style name="mapspot" keep="true" url="get:mapSpot" scale="0.17" parent="map" align="lefttop" edge="center" scale.mobile="0.1" />
-	<style name="fsButton" keep="true" url="get:fsButtonMax" scale="0.25"  parent="map" align="lefttop" edge="center" scale.mobile="3" onclick="openmap();" />
+	<style name="fsButton" keep="true" url="get:fsButtonMax" scale=""  parent="map" align="lefttop" edge="center" scale.mobile="3" onclick="openmap();" />
 		<!-- active spot image (overlays the normal spot) -->
 	<layer name="activespot" url="get:activeSpot" keep="true" align="lefttop" zorder="2" scale="0.17" scale.mobile="0.1"/>
 
@@ -78,13 +79,13 @@
 
 	<!-- Scales small map -->
 	<action name="scalesmall">
-		set(layer[map].scale, get(mapScaleSmall));
+		set(layer[map].scale, get(mapAnimationScale));
 		set(layer[fs].scale, get(fsScaleSmall));
 		
 		if (			
 			device.desktop, <!-- Desktop -->
 			div(smallscale, stagewidth, layer[map].imagewidth);			
-			div(smallscale, get(smallscale), 4);
+			div(smallscale, get(smallscale), get(divideLandscape));
 			tween(layer[map].scale, get(smallscale));
 			tween(layer[map].x, 1.5%);
 			tween(layer[map].y, 3%);
@@ -94,7 +95,7 @@
 
 			(device.mobile AND !fullscreen) AND (stageheight GT stagewidth), <!-- mobile  not fullscreen  -->
 			div(smallscale, stagewidth, layer[map].imagewidth);			
-			div(smallscale, get(smallscale), 2); 
+			div(smallscale, get(smallscale), get(dividePortrait)); 
 			tween(layer[map].scale, get(smallscale));
 			tween(layer[map].x, 3%);
 			tween(layer[map].y, 1.5%);
@@ -104,7 +105,7 @@
 			
 			(device.mobile AND fullscreen)  AND (stageheight GT stagewidth), <!-- mobile fullscreen portrait  -->
 			div(smallscale, stagewidth, layer[map].imagewidth);			
-			div(smallscale, get(smallscale), 2);
+			div(smallscale, get(smallscale), get(dividePortrait));
 			tween(layer[map].scale, get(smallscale));
 			tween(layer[map].x, 1.5%);
 			tween(layer[map].y, 3%);
@@ -114,7 +115,7 @@
 
 			(device.mobile AND !fullscreen) AND (stagewidth GT stageheight), <!-- mobile  not fullscreen  landscape -->
 			div(smallscale, stagewidth, layer[map].imagewidth);			
-			div(smallscale, get(smallscale), 4); 
+			div(smallscale, get(smallscale), get(divideLandscape)); 
 			tween(layer[map].scale, get(smallscale));
 			tween(layer[map].x, 3%);
 			tween(layer[map].y, 1.5%);
@@ -124,7 +125,7 @@
 
 			(device.mobile AND fullscreen) AND (stagewidth GE stageheight), <!-- mobile fullscreen landscape  -->
 			div(smallscale, stagewidth, layer[map].imagewidth);
-			div(smallscale, get(smallscale), 4);
+			div(smallscale, get(smallscale), get(divideLandscape));
 			js(console.log(get(smallscale)));
 			tween(layer[map].scale, get(smallscale));
 			tween(layer[map].x, 3%);
@@ -229,7 +230,7 @@
 
 			(device.mobile AND !fullscreen) AND (stageheight GT stagewidth), <!-- mobile  not fullscreen portrait -->
 			div(smallscale, stagewidth, layer[map].imagewidth);			
-			div(smallscale, get(smallscale), 2); 
+			div(smallscale, get(smallscale), get(dividePortrait)); 
 			tween(layer[map].scale, get(smallscale));
 			tween(layer[map].x, 3%);
 			tween(layer[map].y, 1.5%);
@@ -239,7 +240,7 @@
 			
 			(device.mobile AND fullscreen)  AND (stageheight GT stagewidth), <!-- mobile fullscreen portrait  -->
 			div(smallscale, stagewidth, layer[map].imagewidth);			
-			div(smallscale, get(smallscale), 2);
+			div(smallscale, get(smallscale), get(dividePortrait));
 			tween(layer[map].scale, get(smallscale));
 			tween(layer[map].x, 1.5%);
 			tween(layer[map].y, 3%);
