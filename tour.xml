@@ -86,7 +86,7 @@
 	<events name="orientation" keep="true" onresize="closemap();"  />
 
 	<!--Start code for vr controll -->
-	<!-- <events name="toggle_VR_desktop" keep="true" webvr_onavailable="VR_check_if_desktop();" /> -->
+	<events name="toggle_VR_desktop" keep="true" webvr_onavailable="VR_check_if_desktop();" />
 	<action name="VR_check_if_desktop">
 		if (get(devicename) == "Desktop", 
 			set(layer[skin_btn_vr].visible, false);
