@@ -27,7 +27,7 @@
 	               gyro_keeplookingdirection="false"
 	               webvr="true"
 	               webvr_keeplookingdirection="true"
-	               webvr_prev_next_hotspots="true"
+	               webvr_prev_next_hotspots="false"
 	               autotour="false"
 	               littleplanetintro="false"
 	               followmousecontrol="false"
@@ -83,8 +83,10 @@
 	<include url="skin/vtourskin_design_117round.xml"    />
 	<!-- <include url="skin/vtourskin_design_black.xml"       /> -->
 
+	<events name="orientation" keep="true" onresize="closemap();"  />
+
 	<!--Start code for vr controll -->
-	<events name="toggle_VR_desktop" keep="true" webvr_onavailable="VR_check_if_desktop();" />
+	<!-- <events name="toggle_VR_desktop" keep="true" webvr_onavailable="VR_check_if_desktop();" /> -->
 	<action name="VR_check_if_desktop">
 		if (get(devicename) == "Desktop", 
 			set(layer[skin_btn_vr].visible, false);
@@ -119,11 +121,8 @@
 			, 
 			set(hotspot[play_btn].visible, true);
 		)	
-	</action>
-	
+	</action>	
 	<!-- End code for vr controll -->
-
-
 	
 	<scene name="scene_2_blured" title="2 blured" onstart="updateradar();" thumburl="panos/2_blured.tiles/thumb.jpg" lat="34.91179167" lng="33.63603333" heading="0.0">
 		
@@ -138,6 +137,25 @@
 		</image>
 		<hotspot name="spot1" style="skin_hotspotstyle" ath="-29.221" atv="30.127" linkedscene="scene_3" />
 		<hotspot name="spot2" style="skin_hotspotstyle" ath="34.008" atv="27.337" linkedscene="scene_4" />
+
+		<hotspot name="play_btn"
+				keep="false"
+	       		type="image"
+				depthbuffer="true"
+				distorted="true"
+				torigin="world"
+				enabled="true"
+				tx="-50"
+				ty="0"
+				tz="-500"
+				scale="0.2"
+				ath="0.0"
+				atv="5.0"   
+				url="./UI/play4.png"
+				checkvr="if(webvr.isenabled, set(visible,false);)"
+				onloaded="checkvr();" 
+				onclick="set(visible, false); video_check();"
+				/>
 
 		<hotspot name="info_button"
 		         style="infospot"
@@ -192,9 +210,7 @@
 		         atv="0"   
 		         url="./UI/PL.png"
 				 onclick="set(alpha, 0.0);"  
-				 />	 	
-
-		
+				 />	
 
 		<action name="updateradar">
 			set(layer[activespot].parent, spot1);

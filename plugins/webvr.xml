@@ -305,14 +305,14 @@
 
 	
 	<!-- the EnterVR/ExitVR and SetupVR buttons -->
-	<style name="webvr_button_style"
+	<!-- <style name="webvr_button_style"
 	       type="text"
 	       bgcolor="0x000000"
 	       bgalpha="0.5"
 	       bgroundedge="0"
 	       css="calc:'color:#FFFFFF;font-size:' + 20*webvr_setup_scale*webvr_button_scale + 'px;'"
 	       padding="calc:6*webvr_setup_scale*webvr_button_scale + ' ' + 10*webvr_setup_scale*webvr_button_scale"
-	       />
+	       /> -->
 	
 	<layer name="webvr_enterbutton" keep="true" vr="true"
 	       style="webvr_button_style"
