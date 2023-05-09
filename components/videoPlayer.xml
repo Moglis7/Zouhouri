@@ -1,17 +1,17 @@
-<krpano vp_minimized='false' vp_video='./video/planitarium.mp4' vp_jpg='./video/planitarium00.jpg' volume="0.8" close_btn="./UI/CLOSE3.png">
+<krpano vp_minimized='false' vp_video='./video/Zuhuri_Tekke_final.mov' vp_jpg='./video/kampanopetra00.jpg' volume="0.8" close_btn="./UI/CLOSE3.png">
         
 
     <include url="../plugins/showtext.xml" />
 	<textstyle name="SKIN_TOOLTIPS" font="Arial" fontsize="16" bold="true" italic="false" background="false" border="false" textcolor="0xFFFFFF" effect="dropshadow(1,45,0x000000,4,1);" fadeintime="0.1" fadetime="0.05" />
 	<style name="closeBtn" keep="true" url="../UI/CLOSE2.png" align="lefttop" edge="center"  onclick="videoplayer_close();" />
 
-    <action name="video_check">        
+    <action name="video_check">     
         if(get(vp_minimized), 
             set(vp_minimized, false);
             <!-- set(layer[videoplayer_bg].scale, 1); -->
             set(layer[videoplayer_bg].bgalpha, 0.8);
         
-            tween(layer[videoplayer_bg].scale, 1, 0.5, easeOutBack);            
+            tween(layer[videoplayer_bg].scale, 1, 0.5, easeOutBack);
             set(layer[videoplayer_bg].onclick, videoplayer_minimize());
 			set(layer[videoplayer_bg].enabled, true);
 
@@ -72,7 +72,7 @@
 				set(layer[videoplayer_plugin].scale, 0.0);				
 						
 				
-				set(layer[videoplayer_plugin].onvideocomplete, videoplayer_close(););
+				set(layer[videoplayer_plugin].onvideocomplete, if(layer[videoplayer_bg], if_minimized(); videoplayer_close();););
 				set(layer[videoplayer_plugin].onloaded, videoplayer_plugin_ready(%1));
 				<!-- set(plugin[videoplayer_plugin].onhover, js(console.log(get(plugin[videoplayer_plugin].time )))); -->
 				if('%2' != null, set(layer[videoplayer_plugin].posterurl,'%2'); );
@@ -103,7 +103,7 @@
                     tween(scale,1,0.5,easeOutBack);
                     tween(alpha,1,0.5,default, ifnot(device.ios, play(); videoplayer_close_btn(); do_time_bar(videoplayer_plugin,layer[videoplayer_plugin],bottom,null,70%,10,0,-15,false,10) )); 
             );                 
-            layer[videoplayer_plugin].playvideo(%1);            
+            layer[videoplayer_plugin].playvideo(%1);
         ); 		
 	</action>
 
@@ -216,14 +216,6 @@
             trace("videoplayer_minimize - background layer doesn't exist");
         );  
     </action>
-
-
-
-
-
-
-
-
     
     <action name="do_time_bar">	
 		<!-- do_time_bar( video plugin name , parent , align , edge , width , height , x , y , keep , zorder );
@@ -250,7 +242,7 @@
 		- I will implement this in a future release ;)...
 		-->
 		addplugin(time_bar);	
-		set(plugin[time_bar].url, white.jpg );
+		set(plugin[time_bar].url, "./video/white.jpg" );
 		set(plugin[time_bar].plugin_video_is, %1 );
 		ifnot(%2 == null , set(plugin[time_bar].parent, %2 ); );
 		if(%3 == null , set(plugin[time_bar].align, bottom ); , set(plugin[time_bar].align, %3 ); );
@@ -297,7 +289,7 @@
 		set(plugin[time_].keep, true );
 		
 		addplugin(time_seek);
-		set(plugin[time_seek].url, gris.jpg );
+		set(plugin[time_seek].url, "./video/gris.jpg" );
 		set(plugin[time_seek].parent, time_bar );
 		set(plugin[time_seek].align, left );
 		set(plugin[time_seek].width, 10 );

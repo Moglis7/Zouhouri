@@ -1,0 +1,9 @@
+
+<krpano>  
+  <action name="openFBlink">
+  		openurl('https://www.facebook.com/UNDPCYPRUS',_blank);    
+  </action>
+  
+  
+</krpano>
+
